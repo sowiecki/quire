@@ -1,0 +1,8 @@
+[
+  { "name": "feature1", "color": "blue_anim" },
+  { "name": "feature2", "color": "yellow" },
+  { "name": "feature3", "color": "yellow_anim" },
+  { "name": "feature4", "color": "red" },
+  { "name": "feature5", "color": "red_anim" },
+  { "name": "long-feature-name", "color": "green" }
+]
