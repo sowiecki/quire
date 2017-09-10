@@ -1,4 +1,5 @@
 
+
 CONFIG_FILE_PATH = './config.json' # This is gitignored and must be user-created
 MOCK_BUILDS_PATH = './mock-builds.json'
 
@@ -61,7 +62,7 @@ STATUSES_MAP = {
     'hues': BLUE,
     'animated': False
   },
-  'blue_anim': {
+  'blue_anime': {
     'hues': BLUE,
     'animated': True
   },
@@ -69,7 +70,7 @@ STATUSES_MAP = {
     'hues': RED,
     'animated': False
   },
-  'red_anim': {
+  'red_anime': {
     'hues': RED,
     'animated': True
   },
@@ -77,7 +78,7 @@ STATUSES_MAP = {
     'hues': YELLOW,
     'animated': False
   },
-  'yellow_anim': {
+  'yellow_anime': {
     'hues': YELLOW,
     'animated': True
   },
@@ -85,7 +86,7 @@ STATUSES_MAP = {
     'hues': GREEN,
     'animated': False
   },
-  'green_anim': {
+  'green_anime': {
     'hues': GREEN,
     'animated': True
   },
@@ -93,7 +94,7 @@ STATUSES_MAP = {
     'hues': GREY,
     'animated': False
   },
-  'grey_anim': {
+  'grey_anime': {
     'hues': GREY,
     'animated': True
   },
@@ -101,7 +102,7 @@ STATUSES_MAP = {
     'hues': PINK,
     'animated': False
   },
-  'aborted_anim': {
+  'aborted_anime': {
     'hues': PINK,
     'animated': True
   },
@@ -109,7 +110,7 @@ STATUSES_MAP = {
     'hues': GREY,
     'animated': False
   },
-  'notbuilt_anim': {
+  'notbuilt_anime': {
     'hues': GREY,
     'animated': True
   },

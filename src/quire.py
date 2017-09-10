@@ -1,3 +1,4 @@
+
 import threading
 import time
 import sys
@@ -63,19 +64,21 @@ def neopixel():
 
     for index, job in enumerate(builds['jobs']):
       pixelToLight = constants.NEOPIXEL_LED_COUNT - 1 - index
-      buildStatus = constants.STATUSES_MAP[builds['jobs'][index]['color']]
+      buildStatus = constants.STATUSES_MAP[job['color']]
       if buildStatus['animated']:
         pixelColor = utils.genPixelColor(buildStatus, fadeModifier)
         NEOPIXEL_STRIP.setPixelColor(pixelToLight, pixelColor)
       else:
         pixelColor = utils.genPixelColor(buildStatus)
         NEOPIXEL_STRIP.setPixelColor(pixelToLight, pixelColor)
-    NEOPIXEL_STRIP.show()
 
-  while True:
-    for i in range(constants.MAX_FADE_BRIGHTNESS):
-      lightPixels(i)
-      time.sleep(0.002)
+    if pixelColor <= 256: # TODO troubleshoot why Colors are sometimes out of range
+      while True:
+        for i in range(constants.MAX_FADE_BRIGHTNESS):
+          lightPixels(i)
+          time.sleep(0.002)
+
+      NEOPIXEL_STRIP.show()
 
 def getBuilds(config):
   global builds
