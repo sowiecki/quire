@@ -44,6 +44,6 @@ def sortJobs(jobs):
   master = [filterJob(job) for job in jobs if job['name'] == 'master'][0]
   develop = [filterJob(job) for job in jobs if job['name'] == 'develop'][0]
   sortedJobs = sorted(jobs, key=timestamp, reverse=True)
-  newestJobs = sortedJobs[:constants.NEOPIXEL_LED_COUNT - 3]
+  newestJobs = sortedJobs[:constants.NEOPIXEL_LED_COUNT - 2]
 
   return [master, develop] + newestJobs
