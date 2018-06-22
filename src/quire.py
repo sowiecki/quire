@@ -1,4 +1,5 @@
 
+
 import threading
 import time
 import sys
@@ -31,6 +32,7 @@ NEOPIXEL_STRIP = Adafruit_NeoPixel(
 )
 
 builds = {}
+pixelColor = 0
 
 def setup(CONFIG):
   getBuilds(CONFIG)
@@ -63,22 +65,25 @@ def neopixel():
       fadeModifier = constants.MAX_FADE_BRIGHTNESS - i
 
     for index, job in enumerate(builds['jobs']):
+      if index > constants.NEOPIXEL_LED_COUNT - 1: return # TODO investigate why this is out of range sometimes
+
       pixelToLight = constants.NEOPIXEL_LED_COUNT - 1 - index
-      buildStatus = constants.STATUSES_MAP[job['color']]
-      if buildStatus['animated']:
+      buildStatus = constants.STATUSES_MAP[builds['jobs'][index]['color']]
+
+      if bool(buildStatus) != True:
+        NEOPIXEL_STRIP.setPixelColor(pixelToLight, constants.STATUSES_MAP['grey'])
+      elif buildStatus['animated']:
         pixelColor = utils.genPixelColor(buildStatus, fadeModifier)
         NEOPIXEL_STRIP.setPixelColor(pixelToLight, pixelColor)
       else:
         pixelColor = utils.genPixelColor(buildStatus)
         NEOPIXEL_STRIP.setPixelColor(pixelToLight, pixelColor)
+    NEOPIXEL_STRIP.show()
 
-    if pixelColor <= 256: # TODO troubleshoot why Colors are sometimes out of range
-      while True:
-        for i in range(constants.MAX_FADE_BRIGHTNESS):
-          lightPixels(i)
-          time.sleep(0.002)
-
-      NEOPIXEL_STRIP.show()
+  while True:
+    for i in range(constants.MAX_FADE_BRIGHTNESS):
+      lightPixels(i)
+      time.sleep(0.02)
 
 def getBuilds(config):
   global builds
@@ -99,7 +104,7 @@ def getBuilds(config):
 
 def monitorBuilds(config):
   _getBuilds = partial(getBuilds, config)
-  interval = utils.setInterval(_getBuilds, constants.CHECK_BUILDS_INTERVAL)
+  utils.setInterval(_getBuilds, constants.CHECK_BUILDS_INTERVAL)
 
 def run():
   NEOPIXEL_STRIP.begin()
